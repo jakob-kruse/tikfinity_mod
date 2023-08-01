@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "tikfinity",
+  "version": "${version}",
+  "name": "tikfinity",
+  "description": "",
+  "authors": [],
+  "contact": {
+    "repo": "https://github.com/jakob-kruse/tikfinity-mod"
+  },
+  "license": "MIT",
+  "icon": "assets/tikfinity/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "de.jakobkruse.tikfinity.TikfinityMod"
+    ],
+    "fabric-datagen": [
+      "de.jakobkruse.tikfinity.TikfinityModDataGenerator"
+    ]
+  },
+  "mixins": [
+    "tikfinitymod.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
