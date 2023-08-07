@@ -2,11 +2,11 @@
   "schemaVersion": 1,
   "id": "tikfinity",
   "version": "${version}",
-  "name": "tikfinity",
-  "description": "",
+  "name": "TikFinity Connector",
+  "description": "Client connector for Tikfinity",
   "authors": [],
   "contact": {
-    "repo": "https://github.com/jakob-kruse/tikfinity-mod"
+    "repo": "https://github.com/jakob-kruse/tikfinity_mod"
   },
   "license": "MIT",
   "icon": "assets/tikfinity/icon.png",
@@ -15,8 +15,8 @@
     "main": [
       "de.jakobkruse.tikfinity.TikfinityMod"
     ],
-    "fabric-datagen": [
-      "de.jakobkruse.tikfinity.TikfinityModDataGenerator"
+    "modmenu": [
+      "de.jakobkruse.tikfinity.TikfinityModMenuIntegration"
     ]
   },
   "mixins": [
@@ -25,6 +25,14 @@
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
-    "minecraft": "${minecraft_version}"
+    "minecraft": "${minecraft_version}",
+    "cloth-config": "^11"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "https://discord.gg/TCPeS356TD"
+      }
+    }
   }
 }

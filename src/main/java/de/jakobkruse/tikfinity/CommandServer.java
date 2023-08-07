@@ -3,6 +3,7 @@ package de.jakobkruse.tikfinity;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
+import me.shedaniel.autoconfig.AutoConfig;
 import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
@@ -22,9 +23,10 @@ public class CommandServer {
     private HttpServer server = null;
 
     public void startServer() {
+        ModConfig config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
         if(server == null) {
             try {
-                server = HttpServer.create(new InetSocketAddress(4567), 0);
+                server = HttpServer.create(new InetSocketAddress(config.port), 0);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
