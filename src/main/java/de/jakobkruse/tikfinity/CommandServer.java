@@ -4,6 +4,9 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 import me.shedaniel.autoconfig.AutoConfig;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.network.ServerPlayerEntity;
 import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
@@ -89,14 +92,37 @@ public class CommandServer {
         }
 
         private void handleServer(HttpExchange t) throws IOException {
+            String playerName = null;
+
+            try {
+                MinecraftServer server = MinecraftClient.getInstance().getServer();
+
+                if (server != null) {
+                    String[] playerNames = server.getPlayerManager().getPlayerNames();
+
+                    if (playerNames.length > 0) {
+                        String firstPlayer = playerNames[0];
+
+                        ServerPlayerEntity player = server.getPlayerManager().getPlayer(firstPlayer);
+
+                        if(player != null) {
+                            playerName = player.getEntityName();
+                        }
+                    }
+                }
+            } catch (NullPointerException ignored) {
+
+            }
+
             t.getResponseHeaders().add("Content-Type", "application/json");
-            String response = """
+            String response = String.format("""
                     {
                       "name": "TikFinity Mod",
                       "motd": "string",
                       "version": "1.20.1",
                       "bukkitVersion": "string",
                       "tps": "string",
+                      "playerName": %s,
                       "health": {
                         "cpus": 0,
                         "uptime": 0,
@@ -128,7 +154,7 @@ public class CommandServer {
                       ],
                       "maxPlayers": 0,
                       "onlinePlayers": 0
-                    }""";
+                    }""", playerName != null ? "\"" + playerName + "\"" : "null");
             t.sendResponseHeaders(200, response.length());
             OutputStream os = t.getResponseBody();
             os.write(response.getBytes());

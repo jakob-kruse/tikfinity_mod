@@ -5,6 +5,8 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.network.ServerPlayerEntity;
 
+import java.util.Arrays;
+
 public class CommandExecutor{
     public void execute(String command) {
         if(command.trim().isEmpty()) {
@@ -31,7 +33,7 @@ public class CommandExecutor{
                         return;
                     }
 
-                    String[] commands = command.split("\n");
+                    String[] commands = Arrays.stream(command.split("\n")).map(String::trim).map(cmd -> cmd.startsWith("/") ? cmd : "/" + cmd).toArray(String[]::new);
                     for (String cmd : commands) {
                         cm.executeWithPrefix(player.getCommandSource(), cmd.trim());
                     }
