@@ -9,6 +9,10 @@ A 1.20 Fabric mod to connect your TikTok stream to minecraft using [TikFinity](t
 
 Install Minecraft 1.20.1 and a matching Fabric version ([link to the official installation guide](https://fabricmc.net/wiki/install))
 
+### Fabric API
+
+Install [Fabric API](https://modrinth.com/mod/fabric-api).
+
 ### Cloth Config
 
 Cloth Config is a helper mod used by tikfinity. You need to download and install that alongside the tikfinity mod
